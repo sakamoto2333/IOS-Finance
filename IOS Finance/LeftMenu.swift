@@ -18,7 +18,6 @@ class LeftMenu : UITableViewController {
     var datestart: IndexPath!
     var dateend: IndexPath!
     let classmodel = ClassModel()
-    
     var classa: String!
     var start: Date!
     var end: Date!

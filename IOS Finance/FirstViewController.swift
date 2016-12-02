@@ -32,13 +32,23 @@ class FirstViewController: TabVCTemplate,UITableViewDelegate,UITableViewDataSour
         viewtitle.title = choose.titleForSegment(at: 0)
         choose.selectedSegmentIndex == 0 ? (allmoney.textColor = UIColor.blue) : (allmoney.textColor = UIColor.red)
         choose.selectedSegmentIndex == 0 ? (allmoney.text = String(收入all)) : (allmoney.text = String(支出all))
-        // do stuff here
+        let headers = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(header))
+        headers?.lastUpdatedTimeLabel.isHidden = true
+        tableaa.mj_header = headers
     }
     
     override func viewWillAppear(_ animated: Bool) {
         加载(content: searchtext.text!)
         tableaa.reloadData()
     }
+    
+    func header() {
+        tableaa.reloadData()
+        tableaa.setEditing(false, animated: true)
+        tableaa.mj_header.endRefreshing()
+        ProgressHUD.showSuccess("666")
+    }
+    
     
     func 加载(content: String) {
         let t = DateFormatter()
@@ -303,6 +313,9 @@ class FirstViewController: TabVCTemplate,UITableViewDelegate,UITableViewDataSour
             let a = financeModel.FinanceList.index(of: mdzz)
             financeModel.FinanceList.remove(at: a!)
             financeModel.saveData()
+            if 收入.count == 0 || 支出.count == 0 {
+                tableaa.setEditing(false, animated: true)
+            }
             加载(content: "")
             tableView.reloadData()
         } else if editingStyle == .insert {
