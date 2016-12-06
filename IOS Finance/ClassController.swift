@@ -21,7 +21,6 @@ class ClassController: UITableViewController,UIGestureRecognizerDelegate,UISearc
         longPress.delegate = self
         longPress.minimumPressDuration = 0.5
         self.tableView.addGestureRecognizer(longPress)
-        tableView.tableFooterView = UIView()
         classModel.loadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

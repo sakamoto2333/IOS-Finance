@@ -151,6 +151,10 @@ class FirstViewController: TabVCTemplate,UITableViewDelegate,UITableViewDataSour
             alert.message = "请输入金额"
             self.present(alert, animated: true, completion: nil)
         }
+        else if control.Detail.text == "" {
+            alert.message = "请选择类别"
+            self.present(alert, animated: true, completion: nil)
+        }
         else if control.text.text == "" {
             alert.message = "请输入内容"
             self.present(alert, animated: true, completion: nil)

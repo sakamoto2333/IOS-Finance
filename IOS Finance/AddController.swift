@@ -17,7 +17,7 @@ class AddController: UITableViewController {
     @IBOutlet weak var DatePicker: UIDatePicker!
     @IBOutlet weak var topview: UINavigationItem!
     var 状态: String = ""
-    var selectedclass: String! = nil
+    var selectedclass: String! = ""
     let classModel = ClassModel()
     let financeModel = FinanceModel()
     var datePickerHidden = true
@@ -43,8 +43,10 @@ class AddController: UITableViewController {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         classModel.loadData()
-        selectedclass = classModel.ClassList[0].listclass
-        Detail.text = selectedclass
+        if classModel.ClassList.count != 0 {
+            selectedclass = classModel.ClassList[0].listclass
+            Detail.text = selectedclass
+        }
         date.text = DateFormatter.localizedString(from: DatePicker.date, dateStyle: DateFormatter.Style.short, timeStyle: DateFormatter.Style.short)
         tableView.tableFooterView = UIView()
         // Uncomment the following line to preserve selection between presentations
@@ -55,7 +57,6 @@ class AddController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        classModel.loadData()
         Detail.text = selectedclass
     }
 
