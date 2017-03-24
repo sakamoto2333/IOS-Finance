@@ -18,7 +18,6 @@ class LeftMenu : UITableViewController {
     var datestart: IndexPath!
     var dateend: IndexPath!
     let classmodel = ClassModel()
-    
     var classa: String!
     var start: Date!
     var end: Date!
@@ -28,6 +27,12 @@ class LeftMenu : UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(classchange), name: NSNotification.Name(rawValue: "classchange"), object: nil)
+    }
+    
+    func classchange(_ notification:Notification) {
+        classmodel.loadData()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
