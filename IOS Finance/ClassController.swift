@@ -56,6 +56,7 @@ class ClassController: UITableViewController,UIGestureRecognizerDelegate,UISearc
                 self.classModel.ClassList.append(ClassInfo(listclass: (alert.textFields?.first?.text)!))
                 self.classModel.saveData()
                 self.tableView.reloadData()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "classchange"), object: nil)
             }
         }))
         self.present(alert, animated: true, completion: nil)
@@ -141,6 +142,7 @@ class ClassController: UITableViewController,UIGestureRecognizerDelegate,UISearc
                 classModel.saveData()
                 self.tableView.reloadData()
                 self.tableView.setEditing(true, animated: true)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "classchange"), object: nil)
             }
             else {
                 let alert = UIAlertController(title: "警告", message: "该类别已被选中，无法删除", preferredStyle: .alert)
@@ -159,6 +161,7 @@ class ClassController: UITableViewController,UIGestureRecognizerDelegate,UISearc
         classModel.ClassList.remove(at: sourceIndexPath.row)
         classModel.ClassList.insert(content, at: destinationIndexPath.row)
         classModel.saveData()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "classchange"), object: nil)
     }
     
     // Override to support conditional rearranging of the table view.
